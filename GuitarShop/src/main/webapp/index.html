@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guitar Shop</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <link rel="stylesheet" href="css/style1.css">
+    </head>
+    <body>
+        <button class="menuButton" onclick="products()" type="button">
+            Products</button>
+        &nbsp;
+        
+        <h1 class="h1">Welcome to Guitar Shop! <br> &nbsp;&nbsp;&nbsp; - the ideal place for every guitar enthusiast! </h1>
+        <h2 class="h2">Our goal is to satisfy all your needs! 
+            <br><br>Here you will find everything you want:
+            <br>guitars, amplifiers, picks, effects and many many more!
+            <br><br>Just check our <a href="jsp/products.jsp">offer</a> 
+        </h2> 
+
+        <script type="text/javascript">
+            function products() {
+                window.location = "jsp/products.jsp";
+            }
+
+            function logIn() {
+                window.location = "logIn.jsp";
+            }
+            
+            function contact() {
+                window.location = "contact.jsp";
+            }
+            
+            function administrationPanel() {
+                window.location = "administrationPanel.jsp";
+            }
+            
+        </script>
+        
+        
+        
+    </body>
+</html>

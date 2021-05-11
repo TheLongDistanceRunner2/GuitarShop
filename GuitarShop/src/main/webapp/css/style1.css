@@ -1,0 +1,240 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2021-03-03, 14:50:03
+    Author     : Marcin Ludwisiak
+*/
+
+html {
+    scrollbar-color: dark;
+}
+
+body { 
+    background: url(../images/background3.jpg) no-repeat center center fixed; 
+}
+
+            /*
+                WYKORZYSTANY ZESTAW KOLORÓW:
+
+                color: #2f2e33; ciemny  
+                color: #d5d6d2; szary
+                color: #ffffff; biały   
+                color: #3a5199; niebieski
+            */
+
+.h1 {
+    color: #3377ff;
+    text-align: center;
+    margin-top: 100px;
+    font-family: helvetica;
+    font-size: 50px;
+    font-style: italic;
+}
+
+.h1_2 {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 100px;
+    font-family: helvetica;
+    font-size: 50px;
+    font-style: italic;
+}
+
+.h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 350px;
+    margin-left: 850px;
+    font-family: helvetica;
+}
+
+.h2_2 {
+    color: #ffffff;
+    text-align: center;
+    font-weight:bold;
+    font-style:italic;
+    font-family: helvetica;
+}
+
+
+
+.div1 {
+    color: #ffffff;
+    font: 20px helvetica italic bold; 
+}
+
+    /* błędy: */
+.div2 {
+    color: #ff0000;
+    font: 24px helvetica bold;
+    text-align: center;
+}
+    /* wylogowanie: */
+.div3 {
+    float: right;
+    font: 24px helvetica bold;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.div4 {
+    color: #ffffff;
+    font: 24px helvetica bold;
+    font-weight:bold;
+    font-style:italic;
+    text-align: center;
+}
+
+    /* powrot: */
+.divPowrot {
+    float: left;
+    font: 24px helvetica bold;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.divKonsola {
+    font: 16px helvetica bold;
+    text-align: center;
+    width: 700px;
+    height: 300px;
+    overflow: auto;
+    margin: auto;
+    border: 3px #2f2e33;
+    border-style: solid dotted;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.divKomunikaty {
+    font: 16px helvetica bold;
+    text-align: center;
+    width: 600px;
+    height: 100px;
+    overflow: auto;
+    margin: auto;
+    border: 3px #2f2e33;
+    border-style: solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.divWyborKategorii {
+    text-align: center;
+}
+
+.divIdentyfikatorJednostki{
+    font: 20px bold;
+    text-align: center;
+    color: #ffffff;
+}
+
+.selectMiesiac {
+    width: 600px;
+    height: 100px;
+}
+
+/*
+    całkiem ok 2 kolory silne te te
+
+    color: #2f2e33; ciemny  
+    color: #d5d6d2; szary
+    color: #ffffff; biały   
+    color: #3a5199; niebieski
+*/
+
+.myButton {
+	background-color: #3a5199;
+	border-radius:5px;
+	border:1px solid #2f2e33;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:14px;
+	font-weight:bold;
+	font-style:italic;
+	padding:7px 10px;
+	text-decoration:none;
+}
+.myButton:hover {
+	background-color: #d5d6d2;
+        color: #2f2e33;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+/*.menuButton {
+	background-color:#2f2e33;
+	border-radius:28px;
+	border:1px solid #3a5199;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.menuButton:hover {
+	background-color: #d5d6d2;
+        color: #2f2e33;
+}
+.menuButton:active {
+	position:relative;
+	top:1px;
+}*/
+
+.menuButton {
+        float: right;
+        margin-right: 400px;
+        margin-top: 30px;
+    
+	background-color:#d5d6d2;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#2f2e33;
+	font-family:Verdana;
+	font-size:14px;
+	font-weight:bold;
+	font-style:italic;
+	padding:7px 23px;
+	text-decoration:none;
+}
+.menuButton:hover {
+	background-color: #ffcc33;
+        color: #ffffff;
+}
+.menuButton:active {
+	position:relative;
+	top:1px;
+}
+
+.tabelaPanelAdministracyjny {
+    margin-left: auto;
+    margin-right: auto;
+    color: #ffffff;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff;
+  color: #2f2e33;
+}
