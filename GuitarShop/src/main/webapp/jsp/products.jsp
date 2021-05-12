@@ -23,29 +23,50 @@
     </body>
     
     <%! 
-        ArrayList<Product> productsList = new ArrayList();        
+        ArrayList<Product> productsList = new ArrayList();
+        String imageSource = "";        
     %>    
             
     <%
-        // pobieramy produkty z bazy:
-        
-        ConnectionToSQLite3 connection = new ConnectionToSybase();
+        // get products form database:
+        ConnectionToSQLite3 connection = new ConnectionToSQLite3();
         
         if(connection.getConnection() == null) {       
-            out.println("<h2 align=\"center\"><font color=\"red\">NIE UDAŁO SIĘ POŁĄCZYĆ Z BAZĄ DANYCH!</font></h2>");
+            out.println("<h2 align=\"center\"><font color=\"red\">Cannot open database!</font></h2>");
         }
         else {
-            out.println("POŁĄCZONO Z BAZĄ DANYCH");
-            // ustanawiamy połączenie:
+            //out.println("connected to database");
+            // connect:
             connection.getConnection();
 
             String query = "select * from Products";
 
-            // wykonujemy zapytanie:
+            // execute query:
             connection.selectFromDatabase(query);
 
-            // odbieramy wynik:
+            // catch result:
             productsList = connection.getProductsList();
+            
+            imageSource = "../images/";
+            
+                    // wyświetlamy wyświetlamy zawartość listy produktów:
+            for (int i = 0; i < productsList.size(); i++) {
+                %>
+                <div class="div4"> 
+                     <% out.print(productsList.get(i).getName()); %>
+                     <br><br>
+                     <% String path = imageSource.concat(productsList.get(i).getPicture()); 
+                        //out.println(path);
+                     %>
+                     <img src="<%= path %>" width="500" height="300">
+
+                     <br><br>
+                     <% out.print(productsList.get(i).getPrice() + " zł"); %> 
+                     
+                </div> 
+                <%
+            }
         }
     %>    
+    
 </html>

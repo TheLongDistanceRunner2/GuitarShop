@@ -46,8 +46,8 @@ public class ConnectionToSQLite3 {
     
     public Connection getConnection() {
         try {  
-            Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:G:\\INFORMATYKA\\MAGISTERSKIE\\SEMESTR_2\\PROGRAMOWANIE\\ZALICZENIE\\GuitarShop\\database\\databaseGuitarShop.db");
+            Class.forName("org.sqlite.JDBC");                                                                                                                                   //.db            
+            connection = DriverManager.getConnection("jdbc:sqlite:G:\\INFORMATYKA\\MAGISTERSKIE\\SEMESTR_2\\PROGRAMOWANIE\\ZALICZENIE\\GuitarShop\\database\\databaseGuitarShop.sqlite3");
 
             if (connection != null) {
                 System.out.println("Connected");
@@ -73,10 +73,10 @@ public class ConnectionToSQLite3 {
         ResultSet result = stmt.executeQuery(sql);  
         // odbieramy dane i wpisujemy do listy wynikowej:
         while (result.next()) {
-            this.productsList.add(new Product(Integer.valueOf(result.getString(0)), 
-                                        result.getString(1), 
-                                        Double.valueOf(result.getString(2)),
-                                        result.getString(3)));
+            this.productsList.add(new Product(Integer.valueOf(result.getString(1)), 
+                                        result.getString(2), 
+                                        Double.valueOf(result.getString(3)),
+                                        result.getString(4)));
         }
         
         // zamykamy zapytanie i połączenie !!!

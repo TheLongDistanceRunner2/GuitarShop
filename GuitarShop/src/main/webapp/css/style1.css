@@ -8,12 +8,8 @@ and open the template in the editor.
     Author     : Marcin Ludwisiak
 */
 
-html {
-    scrollbar-color: dark;
-}
-
 body { 
-    background: url(../images/background3.jpg) no-repeat center center fixed; 
+    background: url(../images/background3.jpg) no-repeat center center fixed;  
 }
 
             /*
@@ -59,8 +55,6 @@ body {
     font-family: helvetica;
 }
 
-
-
 .div1 {
     color: #ffffff;
     font: 20px helvetica italic bold; 
@@ -80,9 +74,26 @@ body {
     margin-right: 20px;
 }
 
+
 .div4 {
-    color: #ffffff;
     font: 24px helvetica bold;
+    font-weight:bold;
+    font-style:italic;
+    text-align: center;
+   
+    width: 800px;
+    height: 600px;
+    
+    background-color: lightgrey;
+   
+    border: 2px solid;
+    padding: 50px;
+    margin: 20px;
+}
+
+.div5 {
+    color: #ffffff;
+    font: 24px helvetica italic bold;
     font-weight:bold;
     font-style:italic;
     text-align: center;
