@@ -82,7 +82,7 @@ body {
     text-align: center;
    
     width: 800px;
-    height: 600px;
+    height: 500px;
     
     background-color: lightgrey;
    
@@ -180,6 +180,34 @@ body {
         color: #2f2e33;
 }
 .myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+.addToChartButton {
+        width: 200px;
+        height: 70px;
+    
+	background-color: green;
+	border-radius:5px;
+	border:1px solid #2f2e33;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:14px;
+	font-weight:bold;
+	font-style:italic;
+	padding:7px 10px;
+	text-decoration:none;
+}
+.addToChartButton:hover {
+	background-color: blue;
+        color: #ffffff;
+}
+.addToChartButton:active {
 	position:relative;
 	top:1px;
 }
