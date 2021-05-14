@@ -7,9 +7,14 @@
         <link rel="stylesheet" href="css/style1.css">
     </head>
     <body>
+        
+        <button class="menuButton" onclick="chart()" type="button">
+            Chart</button>
+        &nbsp;
         <button class="menuButton" onclick="products()" type="button">
             Products</button>
         &nbsp;
+
         
         <h1 class="h1">Welcome to Guitar Shop! <br> &nbsp;&nbsp;&nbsp; - the ideal place for every guitar enthusiast! </h1>
         <h2 class="h2">Our goal is to satisfy all your needs! 
@@ -18,21 +23,25 @@
             <br><br>Just check our <a href="jsp/products.jsp">offer</a> 
         </h2> 
 
-        <script type="text/javascript">
+        <script>
             function products() {
                 window.location = "jsp/products.jsp";
             }
+            
+            function chart() {
+                window.location = "jsp/chart.jsp";
+            }
 
             function logIn() {
-                window.location = "logIn.jsp";
+                window.location = "jsp/logIn.jsp";
             }
             
             function contact() {
-                window.location = "contact.jsp";
+                window.location = "jsp/contact.jsp";
             }
             
             function administrationPanel() {
-                window.location = "administrationPanel.jsp";
+                window.location = "jsp/administrationPanel.jsp";
             }
             
         </script>

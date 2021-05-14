@@ -48,11 +48,10 @@ body {
 }
 
 .h2_2 {
-    color: #ffffff;
+    color: lightgreen;
+    margin: auto;
     text-align: center;
-    font-weight:bold;
-    font-style:italic;
-    font-family: helvetica;
+    font: 30px helvetica italic bold; 
 }
 
 .div1 {
@@ -81,7 +80,7 @@ body {
     font-style:italic;
     text-align: center;
    
-    width: 800px;
+    width: 700px;
     height: 500px;
     
     background-color: lightgrey;
@@ -236,7 +235,7 @@ body {
 
 .menuButton {
         float: right;
-        margin-right: 400px;
+        margin-right: 30px;
         margin-top: 30px;
     
 	background-color:#d5d6d2;

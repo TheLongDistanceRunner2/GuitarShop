@@ -19,12 +19,52 @@
         <link rel="stylesheet" href="../css/style1.css">
     </head>
     <body>
+        <button class="menuButton" onclick="chart()" type="button">
+            Chart</button>
+        &nbsp;
+        <button class="menuButton" onclick="mainPage()" type="button">
+            Main page</button>
+        &nbsp;
+
+        
         <h1 class="h1">Our offer:</h1>
-    </body>
+
+
+        
+        <script>
+            function mainPage() {
+                window.location = "../index.html";
+            }
+            
+            function products() {
+                window.location = "jsp/products.jsp";
+            }
+            
+            function chart() {
+                window.location = "chart.jsp";
+            }
+
+            function logIn() {
+                window.location = "jsp/logIn.jsp";
+            }
+            
+            function contact() {
+                window.location = "jsp/contact.jsp";
+            }
+            
+            function administrationPanel() {
+                window.location = "jsp/administrationPanel.jsp";
+            }
+            
+        </script>
+
+    
+    
     
     <%! 
         ArrayList<Product> productsList = new ArrayList();
-        String imageSource = "";        
+        String imageSource = "";
+        int addedItemNumber = 0;        
     %>    
             
     <%
@@ -45,7 +85,39 @@
             // catch result:
             productsList = connection.getProductsList();
             
-            imageSource = "../images/"; 
+            imageSource = "../images/";
+            
+        //==================================================================
+
+        // catch response from buttons:
+        for (int i = 0; i < productsList.size(); i++) {
+            String name = "addItem" + i;
+            String currentButton = request.getParameter(name);
+
+            // exact button:
+            if(currentButton != null) {
+                Cookie[] cookies = request.getCookies();
+            
+          
+                // add cookie indicating that this item has been added to chart:
+                String cookieName = "addItem" + addedItemNumber;
+                // get id, because cookie cannont contain space mark!
+                String selectedProduct = String.valueOf(productsList.get(i).getID());
+
+                Cookie addedItem = new Cookie(cookieName, selectedProduct);
+
+                // Add cookie in the response header.
+                response.addCookie(addedItem);
+
+                // icrement value of adedItemNumber (in order to no to have a duplicate cookie):
+                addedItemNumber++;
+
+                // show communicate:
+                out.println("<br><br>");
+                out.println("<h2 class=\"h2_2\" align=\"center\">" + "Product added to chart!" + "</h2>");
+                out.println("<br><br>");
+            }
+        }
     %>
             
             <form method="POST" action="products.jsp">       
@@ -60,7 +132,7 @@
                          <% String path = imageSource.concat(productsList.get(i).getPicture()); 
                             //out.println(path);
                          %>
-                         <img src="<%= path %>" width="500" height="300">
+                         <img src="<%=path%>" width="500" height="300">
 
                          <br><br>
                          <% out.print(productsList.get(i).getPrice() + " zł"); %> 
@@ -74,31 +146,6 @@
             </form>
             <%
         }
-
-                int addedItemNumber = 0;
-
-        // catch response from buttons:
-        for (int i = 0; i < productsList.size(); i++) {
-            String name = "addItem" + i;
-            String currentButton = request.getParameter(name);
-
-            // exact ongoing button:
-            if(currentButton != null) {
-                out.println("WRESZCIE !!!");
-                
-                // add cookie indicating that this item has been added to chart:
-                //String cookieName = "addItem" + addedItemNumber;
-                //String selectedProduct = productsList.get(i).getName();
-
-                //Cookie addedItem = new Cookie(cookieName, selectedProduct);
-
-                // Add cookie in the response header.
-                //response.addCookie(addedItem);
-
-                // icrement value of adedItemNumber (in order to no to have a duplicate cookie):
-                //addedItemNumber++;
-            }
-        }
     %>    
-    
+    </body>
 </html>
