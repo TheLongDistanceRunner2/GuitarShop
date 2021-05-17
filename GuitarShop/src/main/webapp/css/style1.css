@@ -98,6 +98,36 @@ body {
     text-align: center;
 }
 
+.divChart {
+    font: 24px helvetica bold;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+   
+    width: 600px;
+    height: 120px;
+    
+    background-color: lightgrey;
+   
+    border: 2px solid;
+    padding: 50px;
+    margin: 20px;
+}
+
+.divCostSum {
+    font: 24px helvetica bold;
+    text-align: center;
+   
+    width: 220px;
+    height: 50px;
+    
+    background-color: lightgrey;
+   
+    border: 2px solid;
+    padding: 50px;
+    margin: 20px;
+}
+
     /* powrot: */
 .divPowrot {
     float: left;
@@ -210,28 +240,6 @@ body {
 	position:relative;
 	top:1px;
 }
-
-/*.menuButton {
-	background-color:#2f2e33;
-	border-radius:28px;
-	border:1px solid #3a5199;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
-}
-.menuButton:hover {
-	background-color: #d5d6d2;
-        color: #2f2e33;
-}
-.menuButton:active {
-	position:relative;
-	top:1px;
-}*/
 
 .menuButton {
         float: right;
