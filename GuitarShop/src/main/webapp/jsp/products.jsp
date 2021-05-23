@@ -87,37 +87,37 @@
             
             imageSource = "../images/";
             
-        //==================================================================
+            //==================================================================
 
-        // catch response from buttons:
-        for (int i = 0; i < productsList.size(); i++) {
-            String name = "addItem" + i;
-            String currentButton = request.getParameter(name);
+            // catch response from buttons:
+            for (int i = 0; i < productsList.size(); i++) {
+                String name = "addItem" + i;
+                String currentButton = request.getParameter(name);
 
-            // exact button:
-            if(currentButton != null) {
-                Cookie[] cookies = request.getCookies();
-            
-          
-                // add cookie indicating that this item has been added to chart:
-                String cookieName = "addItem" + addedItemNumber;
-                // get id, because cookie cannont contain space mark!
-                String selectedProduct = String.valueOf(productsList.get(i).getID());
+                // exact button:
+                if(currentButton != null) {
+                    Cookie[] cookies = request.getCookies();
 
-                Cookie addedItem = new Cookie(cookieName, selectedProduct);
 
-                // Add cookie in the response header.
-                response.addCookie(addedItem);
+                    // add cookie indicating that this item has been added to chart:
+                    String cookieName = "addItem" + addedItemNumber;
+                    // get id, because cookie cannont contain space mark!
+                    String selectedProduct = String.valueOf(productsList.get(i).getID());
 
-                // icrement value of adedItemNumber (in order to no to have a duplicate cookie):
-                addedItemNumber++;
+                    Cookie addedItem = new Cookie(cookieName, selectedProduct);
 
-                // show communicate:
-                out.println("<br><br>");
-                out.println("<h2 class=\"h2_2\" align=\"center\">" + "Product added to chart!" + "</h2>");
-                out.println("<br><br>");
+                    // Add cookie in the response header.
+                    response.addCookie(addedItem);
+
+                    // icrement value of adedItemNumber (in order to no to have a duplicate cookie):
+                    addedItemNumber++;
+
+                    // show communicate:
+                    out.println("<br><br>");
+                    out.println("<h2 class=\"h2_2\" align=\"center\">" + "Product added to chart!" + "</h2>");
+                    out.println("<br><br>");
+                }
             }
-        }
     %>
             
             <form method="POST" action="products.jsp">       

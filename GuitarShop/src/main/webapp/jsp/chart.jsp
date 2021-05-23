@@ -17,7 +17,44 @@
         <link rel="stylesheet" href="../css/style1.css">
     </head>
     <body>
+        <button class="menuButton" onclick="products()" type="button">
+            Products</button>
+        &nbsp;
+        <button class="menuButton" onclick="mainPage()" type="button">
+            Main page</button>
+        &nbsp;
+
+
+        
         <h1 class="h1">Your chart:</h1>
+        
+        <script>
+            function mainPage() {
+                window.location = "../index.html";
+            }
+            
+            function products() {
+                window.location = "products.jsp";
+            }
+            
+            function chart() {
+                window.location = "chart.jsp";
+            }
+
+            function logIn() {
+                window.location = "jsp/logIn.jsp";
+            }
+            
+            function contact() {
+                window.location = "jsp/contact.jsp";
+            }
+            
+            function administrationPanel() {
+                window.location = "jsp/administrationPanel.jsp";
+            }
+            
+        </script>
+        
         
         <%!
             String imageSource = "../images/"; 
@@ -30,6 +67,10 @@
             Cookie[] cookies = request.getCookies();
             ArrayList<String> selectedItems = new ArrayList<>();
             ArrayList<Product> fromDatabase = new ArrayList();
+            
+            
+            
+        //==================================================================
             
             // if cookies is not empty:
             if (cookies != null) {
@@ -59,7 +100,36 @@
                     // catch result:
                     fromDatabase = connection.getProductsList();
                     
-                    // print all items in added to chart:
+                    //============================================================
+                    // catch response from clear chart button:
+                    String clearChartButton = request.getParameter("clearChartButton");
+
+                    if(clearChartButton != null) {
+                        for (int i = 0; i < selectedItems.size(); i++) {
+                            // remove item:
+                            selectedItems.remove(i);
+                            
+                            for (int j = 0; j < cookies.length; j++) {
+                                // if found cookie with name addItem:
+                                if(cookies[j].getName().startsWith("addItem")) {
+                                    // remove this cookie:
+                                    // so get it first:
+                                    Cookie cookie = cookies[j];
+                                    
+                                    // then set its' time of existing to 0:
+                                    cookie.setMaxAge(0);
+                                    // and finally add it to response header:
+                                    response.addCookie(cookie);
+                                }
+                            }
+                        }
+                        
+                        selectedItems.clear();
+                    }
+
+                    
+                    // ==========================================================
+                    // print all items added to chart:
                     for (int i = 0; i < selectedItems.size(); i++) {
                         int currentID = Integer.valueOf(selectedItems.get(i));
                         
@@ -72,16 +142,19 @@
                             if(currentProduct.getID() == currentID) {
                                 // print it:
                                 %>
-                                <div class="divChart">
-                                    <% out.print(currentProduct.getName()); %>
-                                    <br><br>
-                                    <% String path = imageSource.concat(currentProduct.getPicture()); 
-                                       //out.println(path);
-                                    %>
-                                    <img src="<%=path%>" width="200" height="100">
-                                    &nbsp;
-                                    <% out.print(currentProduct.getPrice() + " zł"); %> 
-                                </div>
+                                <form method="POST" action="chart.jsp">  
+                                    <div class="divChart">
+                                        <% out.print(currentProduct.getName()); %>
+                                        <br><br>
+                                        <% String path = imageSource.concat(currentProduct.getPicture()); 
+                                           //out.println(path);
+                                        %>
+                                        <img src="<%=path%>" width="200" height="100">
+                                        &nbsp;
+                                        <% out.print(currentProduct.getPrice() + " zł"); %>
+                                        <br><br> 
+                                    </div>   
+                                </form>
                                 <%  
                                 
                                 // add cost to sum of costs:
@@ -89,15 +162,27 @@
                             }
                         }
                     }
+
+
+
+
+
+
+                    %>
+                    <form method="POST" action="chart.jsp">
+                        <input class="clearChartButton" type="submit" id="clearChartButton" name="clearChartButton" value="Clear chart!"/> 
+                    </form>    
+                    <%
                 }
             }
-
             %>
+            
+            
             <div class="divCostSum">
                 <% out.println("<h2 class=\"h2_2\" align=\"center\"><font color=\"black\">" + "Sum of all items\n: " 
                         + sumCost + " zł" + "</font></h2>"); %>
             </div> 
   
-
+            
     </body>
 </html>

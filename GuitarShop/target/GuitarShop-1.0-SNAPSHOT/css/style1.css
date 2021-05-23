@@ -54,6 +54,13 @@ body {
     font: 30px helvetica italic bold; 
 }
 
+.h2_3 {
+    color: orangered;
+    margin: auto;
+    text-align: center;
+    font: 30px helvetica italic bold; 
+}
+
 .div1 {
     color: #ffffff;
     font: 20px helvetica italic bold; 
@@ -104,8 +111,8 @@ body {
     font-style: italic;
     text-align: center;
    
-    width: 600px;
-    height: 120px;
+    width: 400px;
+    height: 150px;
     
     background-color: lightgrey;
    
@@ -240,6 +247,35 @@ body {
 	position:relative;
 	top:1px;
 }
+
+
+.clearChartButton {
+        width: 200px;
+        height: 70px;
+    
+	background-color: orange;
+	border-radius:5px;
+	border:1px solid #2f2e33;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:14px;
+	font-weight:bold;
+	font-style:italic;
+	padding:7px 10px;
+	text-decoration:none;
+}
+.clearChartButton:hover {
+	background-color: red;
+        color: black;
+}
+.clearChartButton:active {
+	position:relative;
+	top:1px;
+}
+
+
 
 .menuButton {
         float: right;
