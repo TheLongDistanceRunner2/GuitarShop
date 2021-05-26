@@ -183,6 +183,16 @@ body {
     color: #ffffff;
 }
 
+.divHelloMessage {
+    font-family:Verdana;
+    font-size:14px;
+    font-weight:bold;
+    font-style:italic;
+    color: white;
+}
+
+
+
 .selectMiesiac {
     width: 600px;
     height: 100px;

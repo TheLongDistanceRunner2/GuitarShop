@@ -1,2 +1,3 @@
 com\mycompany\guitarshop\ConnectionToSQLite3.class
+com\mycompany\guitarshop\Login.class
 com\mycompany\guitarshop\Product.class

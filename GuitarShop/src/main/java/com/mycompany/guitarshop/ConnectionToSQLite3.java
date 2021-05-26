@@ -17,11 +17,13 @@ public class ConnectionToSQLite3 {
     private Connection connection;
     // wynik zapytania:
     private ArrayList<Product> productsList;
+    private ArrayList<Login> loginList;
 
     public ConnectionToSQLite3() {
         this.fileDestination = null;
         this.connection = null;
         this.productsList = new ArrayList<>();
+        this.loginList = new ArrayList<>();
     }
     
     public String getFileDestination() {
@@ -42,6 +44,14 @@ public class ConnectionToSQLite3 {
 
     public void setProductsList(ArrayList<Product> productsList) {
         this.productsList = productsList;
+    }
+
+    public ArrayList<Login> getLoginList() {
+        return loginList;
+    }
+
+    public void setLoginList(ArrayList<Login> loginList) {
+        this.loginList = loginList;
     }
     
     public Connection getConnection() {
@@ -85,4 +95,23 @@ public class ConnectionToSQLite3 {
         this.connection.close();
     }
 
+    public void selectLoginFromDatabase(String sql) throws SQLException {
+        //step3 create the statement object  
+        Statement stmt = connection.createStatement();  
+
+        //step4 execute query  
+        ResultSet result = stmt.executeQuery(sql);  
+        // odbieramy dane i wpisujemy do listy wynikowej:
+        while (result.next()) {
+            this.loginList.add(new Login(Integer.valueOf(result.getString(1)), 
+                                        result.getString(2), 
+                                        result.getString(3)));
+        }
+        
+        // zamykamy zapytanie i połączenie !!!
+        result.close();
+        stmt.close();
+        this.connection.close();
+    }
+    
 }
