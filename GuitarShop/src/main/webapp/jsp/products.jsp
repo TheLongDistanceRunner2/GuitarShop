@@ -19,17 +19,18 @@
         <link rel="stylesheet" href="../css/style1.css">
     </head>
     <body>
-        <button class="menuButton" onclick="chart()" type="button">
-            Chart</button>
-        &nbsp;
         <button class="menuButton" onclick="mainPage()" type="button">
             Main page</button>
         &nbsp;
         
+        <%!
+            boolean flag = false;
+        %>    
+        
         <%
             Cookie _cookie = null;
             Cookie[] _cookies = null;
-
+            
             // Get an array of Cookies associated with the this domain
             _cookies = request.getCookies();
 
@@ -39,9 +40,15 @@
                   
                     // if logged in:
                     if (_cookie.getName().equals("login")) {
+                        // set flag:
+                        flag = true;
+                    
                         // show log out button:
                         %>
                         <form method="POST" action="products.jsp">
+                            <button class="menuButton" onclick="chart()" type="button">
+                                Chart</button>
+                            &nbsp;
                             <input class="menuButton" name="logOutButton" id="logOutButton" type="submit" value="Log out!"/>
                             &nbsp;
                         </form>
@@ -51,23 +58,26 @@
                         // and print hello message:
                         %>
                         <%
-                        out.print("<div align=\"right\" style=\"font: 24px helvetica italic; font-style: italic;\"><font color=\"white\" >Hello " + _cookie.getValue()+ "! &nbsp&nbsp&nbsp </font></div>");
-                        
-                    }
-                    // if not logged in:
-                    else {
-                        // show log in button:
-                        %>
-                        <form method="POST" action="products.jsp">
-                            <input class="menuButton" name="logInButton" id="logInButton" type="submit" value="Log in" onclick="logIn()" />
-                            &nbsp;
-                        </form>
-                        <%
+                        out.print("<div align=\"right\" style=\"font: 24px helvetica italic; font-style: italic;\"><font color=\"white\" >Hello " + _cookie.getValue()+ "! &nbsp&nbsp&nbsp </font></div>");                       
                     }
                 }
-            } 
+            }
+            else {
+                out.println("asddasd");
+            }
 
-            
+            // if not logged in:
+            if (flag == false) {
+                // show log in button:
+                %>
+                <form method="POST" action="products.jsp">
+                    <input class="menuButton" name="logInButton" id="logInButton" type="submit" value="Log in" onclick="logIn()" />
+                    &nbsp;
+                </form>
+                <%
+            }
+
+
             // if button log off pressed:
             String logOffButton = request.getParameter("logOutButton");
 
@@ -89,6 +99,18 @@
                             cookie2.setMaxAge(0);
                             response.addCookie(cookie2);
 
+                            // delete all cookies with added products to chart:
+                            for (int j = 0; j < cookies2.length; j++) {
+                                Cookie tmpCookie = cookies2[j];
+                                
+                                // if found such cookie:
+                                if (tmpCookie.getName().contains("addItem")) {
+                                    // delete it:
+                                    tmpCookie.setMaxAge(0);
+                                    response.addCookie(tmpCookie);
+                                }
+                            }
+
                             // redirect to main page:
                             String redirectURL = "../index.html";
                             response.sendRedirect(redirectURL);
@@ -97,7 +119,14 @@
                 }
             }
 
+            // if login button pressed:
+            String logInButton = request.getParameter("logInButton");
 
+            if (logInButton != null) {
+                // redirect to login page:
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
 
         %>    
 
@@ -163,34 +192,54 @@
             imageSource = "../images/";
             
             //==================================================================
-
+            boolean flag2 = false;
+            
             // catch response from buttons:
             for (int i = 0; i < productsList.size(); i++) {
                 String name = "addItem" + i;
                 String currentButton = request.getParameter(name);
-
+                
                 // exact button:
                 if(currentButton != null) {
-                    Cookie[] cookies = request.getCookies();
+                    Cookie cookie4 = null;
+                    Cookie[] cookies4 = request.getCookies();;
+                
+                    // if the user is logged in:
+                    for (int j = 0; j < cookies4.length; j++) {
+                        cookie4 = cookies4[j];
 
+                        // if found such cookie:
+                        if (cookie4.getName().equals("login")) {
+                            flag2 = true;
+                        
+                            Cookie[] cookies = request.getCookies();
 
-                    // add cookie indicating that this item has been added to chart:
-                    String cookieName = "addItem" + addedItemNumber;
-                    // get id, because cookie cannont contain space mark!
-                    String selectedProduct = String.valueOf(productsList.get(i).getID());
+                            // add cookie indicating that this item has been added to chart:
+                            String cookieName = "addItem" + addedItemNumber;
+                            // get id, because cookie cannont contain space mark!
+                            String selectedProduct = String.valueOf(productsList.get(i).getID());
 
-                    Cookie addedItem = new Cookie(cookieName, selectedProduct);
+                            Cookie addedItem = new Cookie(cookieName, selectedProduct);
 
-                    // Add cookie in the response header.
-                    response.addCookie(addedItem);
+                            // Add cookie in the response header.
+                            response.addCookie(addedItem);
 
-                    // icrement value of adedItemNumber (in order to no to have a duplicate cookie):
-                    addedItemNumber++;
+                            // icrement value of adedItemNumber (in order to no to have a duplicate cookie):
+                            addedItemNumber++;
 
-                    // show communicate:
-                    out.println("<br><br>");
-                    out.println("<h2 class=\"h2_2\" align=\"center\">" + "Product added to chart!" + "</h2>");
-                    out.println("<br><br>");
+                            // show communicate:
+                            out.println("<br><br>");
+                            out.println("<h2 class=\"h2_2\" align=\"center\">" + "Product added to chart!" + "</h2>");
+                            out.println("<br><br>");
+                        }
+                    }
+                    
+                    if (flag2 == false) {
+                        // show communicate:
+                        out.println("<br><br>");
+                        out.println("<h2 class=\"h2_4\" align=\"center\">" + "You have to be logged to add product!" + "</h2>");
+                        out.println("<br><br>");
+                    }  
                 }
             }
     %>

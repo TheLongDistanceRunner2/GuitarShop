@@ -61,6 +61,13 @@ body {
     font: 30px helvetica italic bold; 
 }
 
+.h2_4 {
+    color: red;
+    margin: auto;
+    text-align: center;
+    font: 30px helvetica italic bold; 
+}
+
 .div1 {
     color: #ffffff;
     font: 20px helvetica italic bold; 
