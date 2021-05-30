@@ -41,6 +41,17 @@
                         // show buttons:
                         %>
                         <form method="POST" action="products.jsp">
+                            <%
+                            // if the admin is logged in:
+                            if (_cookie.getValue().equals("admin")) {
+                                // show button of administration panel:
+                                %>
+                                <button class="menuButton" onclick="administrationPanel()" type="button">
+                                    Administration panel</button>
+                                &nbsp;
+                                <%
+                            }
+                            %>
                             <button class="menuButton" onclick="chart()" type="button">
                                 Chart</button>
                             &nbsp;
@@ -137,9 +148,6 @@
                         }
                     }       
                 }
-                else {
-                    out.print("aaasd");
-                }
             }
 
             // if login button pressed:
@@ -177,7 +185,7 @@
             }
             
             function administrationPanel() {
-                window.location = "jsp/administrationPanel.jsp";
+                window.location = "administrationPanel.jsp";
             }
             
         </script>

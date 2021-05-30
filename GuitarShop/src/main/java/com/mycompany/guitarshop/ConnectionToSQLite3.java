@@ -113,5 +113,5 @@ public class ConnectionToSQLite3 {
         stmt.close();
         this.connection.close();
     }
-    
+   
 }

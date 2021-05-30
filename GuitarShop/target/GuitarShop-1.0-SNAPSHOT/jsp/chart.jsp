@@ -37,6 +37,17 @@
                         // show log out button:
                         %>
                         <form method="POST" action="products.jsp">
+                            <%
+                                // if the admin is logged in:
+                                if (_cookie.getValue().equals("admin")) {
+                                    // show button of administration panel:
+                                    %>
+                                    <button class="menuButton" onclick="administrationPanel()" type="button">
+                                        Administration panel</button>
+                                    &nbsp;
+                                    <%
+                                }
+                            %>
                             <button class="menuButton" onclick="products()" type="button">
                                 Products</button>
                             &nbsp;
@@ -153,7 +164,7 @@
             }
             
             function administrationPanel() {
-                window.location = "jsp/administrationPanel.jsp";
+                window.location = "administrationPanel.jsp";
             }
             
         </script>

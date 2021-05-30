@@ -42,10 +42,21 @@
                     if (_cookie.getName().equals("login")) {
                         // set flag:
                         flag = true;
-                    
+                        
                         // show log out button:
                         %>
                         <form method="POST" action="products.jsp">
+                            <%
+                            // if the admin is logged in:
+                            if (_cookie.getValue().equals("admin")) {
+                                // show button of administration panel:
+                                %>
+                                <button class="menuButton" onclick="administrationPanel()" type="button">
+                                    Administration panel</button>
+                                &nbsp;
+                                <%
+                            }
+                            %>
                             <button class="menuButton" onclick="chart()" type="button">
                                 Chart</button>
                             &nbsp;
@@ -134,7 +145,6 @@
         <h1 class="h1">Our offer:</h1>
 
 
-        
         <script>
             function mainPage() {
                 window.location = "../index.html";
@@ -157,14 +167,11 @@
             }
             
             function administrationPanel() {
-                window.location = "jsp/administrationPanel.jsp";
+                window.location = "administrationPanel.jsp";
             }
             
         </script>
-
-    
-    
-    
+ 
     <%! 
         ArrayList<Product> productsList = new ArrayList();
         String imageSource = "";
