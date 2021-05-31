@@ -212,10 +212,7 @@
                     pstmt.setString(4, picture);
                     // execute query:
                     pstmt.executeUpdate();
-                    
-http://localhost:8080/GuitarShop/images/bossCS3.jpg
-
-                    
+                   
                     %>
                     <div class="divAdminMessage" style="margin-left: 650px">
                         <% out.println("<h2  class=\"h2_4\" align=\"center\"><font color=\"green\">" + "Added successfully!" + "</font></h2>"); %>

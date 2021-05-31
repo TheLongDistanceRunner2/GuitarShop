@@ -15,12 +15,14 @@ public class Product {
     private String name;
     private double price;
     private String picture;
+    private String category;
 
-    public Product(int ID, String name, double price, String picture) {
+    public Product(int ID, String name, double price, String picture, String category) {
         this.ID = ID;
         this.name = name;
         this.price = price;
         this.picture = picture;
+        this.category = category;
     }
 
     public int getID() {
@@ -54,4 +56,13 @@ public class Product {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
 }

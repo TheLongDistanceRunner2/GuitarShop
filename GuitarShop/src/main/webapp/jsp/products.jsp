@@ -144,6 +144,36 @@
         
         <h1 class="h1">Our offer:</h1>
 
+        <form style="margin-left: 650px">
+            <div class="divProductsFilter">
+                <h2 class="h2_6">Filter by:</h2>
+                <br>
+                <div>
+                    <select name="selectCategory" id="selectCategory">
+                        <option value="all" selected="true">All</option>
+                        <option value="guitar">Guitars</option>
+                        <option value="amplifier">Amplifiers</option>
+                        <option value="pick">Picks</option>
+                        <option value="effect">Effects</option>
+                      </select>
+                </div>
+                <br>
+                
+                <input class="addToChartButton" id="filterButton" name="filterButton" type="submit" value="Filter">
+            </div>    
+        </form>
+        
+        
+        <%
+            String filter = "all";
+            String selectCategory = request.getParameter("selectCategory"); 
+
+            // when chose type of filter:
+            if (selectCategory != null) {
+                filter = selectCategory;
+            }
+        %>    
+        
 
         <script>
             function mainPage() {
@@ -253,26 +283,58 @@
             
             <form method="POST" action="products.jsp">       
             <%
-                // wyświetlamy wyświetlamy zawartość listy produktów:
-                for (int i = 0; i < productsList.size(); i++) {
-                    String buttonName = "addItem" + i;
-                    %>
-                    <div class="div4"> 
-                         <% out.print(productsList.get(i).getName()); %>
-                         <br><br>
-                         <% String path = imageSource.concat(productsList.get(i).getPicture()); 
-                            //out.println(path);
-                         %>
-                         <img src="<%=path%>" width="500" height="300">
+                // jeśli wybrano filtr wszystkie:
+                if (filter.equals("all")) {
+                     // wyświetlamy wyświetlamy zawartość listy produktów:
+                    for (int i = 0; i < productsList.size(); i++) {
+                        String buttonName = "addItem" + i;
+                        %>
+                        <div class="div4" style="margin-left: 500px"> 
+                             <% out.print(productsList.get(i).getName()); %>
+                             <br><br>
+                             <% String path = imageSource.concat(productsList.get(i).getPicture()); 
+                                //out.println(path);
+                             %>
+                             <img src="<%=path%>" width="500" height="300">
 
-                         <br><br>
-                         <% out.print(productsList.get(i).getPrice() + " zł"); %> 
+                             <br><br>
+                             <% out.print(productsList.get(i).getPrice() + " zł"); %> 
 
-                         <br><br>
-                         <input class="addToChartButton" type="submit" id="<%=buttonName%>" name="<%=buttonName%>" value="Add to chart!"/> 
-                    </div> 
-                    <%
+                             <br><br>
+                             <input class="addToChartButton" type="submit" id="<%=buttonName%>" name="<%=buttonName%>" value="Add to chart!"/> 
+                        </div> 
+                        <%
+                    }
                 }
+                // jeśli wybrano inny filtr:
+                else {
+                    // wyświetlamy wyświetlamy zawartość listy produktów:
+                    for (int i = 0; i < productsList.size(); i++) {
+                        Product tmpProduct = productsList.get(i);
+
+                        // wyświetlamy tylko te produkty, które są zgodne z filtrowaniem:
+                        if(tmpProduct.getCategory().equals(filter)) {
+                            String buttonName = "addItem" + i;
+                            %>
+                            <div class="div4" style="margin-left: 500px"> 
+                                 <% out.print(productsList.get(i).getName()); %>
+                                 <br><br>
+                                 <% String path = imageSource.concat(productsList.get(i).getPicture()); 
+                                    //out.println(path);
+                                 %>
+                                 <img src="<%=path%>" width="500" height="300">
+
+                                 <br><br>
+                                 <% out.print(productsList.get(i).getPrice() + " zł"); %> 
+
+                                 <br><br>
+                                 <input class="addToChartButton" type="submit" id="<%=buttonName%>" name="<%=buttonName%>" value="Add to chart!"/> 
+                            </div> 
+                            <%
+                        }
+                    }
+                }
+                
             %>
             </form>
             <%

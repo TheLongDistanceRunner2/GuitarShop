@@ -255,7 +255,7 @@
                             if(currentProduct.getID() == currentID) {
                                 // print it:
                                 %>
-                                <form method="POST" action="chart.jsp">  
+                                <form method="POST" action="chart.jsp" style="margin-left: 670px">  
                                     <div class="divChart">
                                         <% out.print(currentProduct.getName()); %>
                                         <br><br>
@@ -282,7 +282,7 @@
 
 
                     %>
-                    <form method="POST" action="chart.jsp">
+                    <form method="POST" action="chart.jsp" style="margin-left: 850px">
                         <input class="clearChartButton" type="submit" id="clearChartButton" name="clearChartButton" value="Clear chart!"/> 
                     </form>    
                     <%
@@ -291,7 +291,7 @@
             %>
             
             
-            <div class="divCostSum">
+            <div class="divCostSum" style="margin-left: 780px">
                 <% out.println("<h2 class=\"h2_2\" align=\"center\"><font color=\"black\">" + "Sum of all items\n: " 
                         + sumCost + " zł" + "</font></h2>"); %>
             </div> 
