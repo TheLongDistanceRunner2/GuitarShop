@@ -20,6 +20,9 @@
         <button class="menuButton" onclick="mainPage()" type="button">
             Main page</button>
         &nbsp;
+        <button class="menuButton" onclick="orders()" type="button">
+            Orders</button>
+        &nbsp;
         
         <%!
             boolean flag = false;
@@ -62,9 +65,6 @@
                         out.print("<div align=\"right\" style=\"font: 24px helvetica italic; font-style: italic;\"><font color=\"white\" >Hello " + _cookie.getValue()+ "! &nbsp&nbsp&nbsp </font></div>");                       
                     }
                 }
-            }
-            else {
-                out.println("asddasd");
             }
 
             // if not logged in:
@@ -161,6 +161,10 @@
                 window.location = "administrationPanel.jsp";
             }
             
+            function orders() {
+                window.location = "orders.jsp";
+            }
+            
         </script>
         
         <br><br>
@@ -231,6 +235,69 @@
 
         %>    
         
+        
+        <br><br>
+        <div class="divAdminHeader" style="margin-left: 700px">
+            <h2 class="h2_5">Here you can create new account: </h2>
+        </div>
+        
+        <div class="divAdmin" style="margin-left: 700px">
+            <form method="POST" action="administrationPanel.jsp">
+                <label>Id:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="idUser" name="idUser" type="number" value="1"/>
+                <br>
+                <label>Login:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="loginUser" name="loginUser" type="text"/>
+                <br>
+                <label>Password:</label>&nbsp;<input id="passwordUser" name="passwordUser" type="password"/>
+                <br><br><br>
+                <input class="addToChartButton" type="submit" id="createUser" name="createUser" value="Create User!"/>
+            </form>
+        </div>
+        
+        <%
+            String idNewUser = request.getParameter("idUser");
+            String loginNewUser = request.getParameter("loginUser");
+            String passwordNewUser = request.getParameter("passwordUser");
+            
+            // if button add to database pressed:
+            if (idNewUser != null && loginNewUser != null && passwordNewUser != null) {
+                // get products form database:
+                ConnectionToSQLite3 connection = new ConnectionToSQLite3();
+
+                if(connection.getConnection() == null) {       
+                    out.println("<h2 align=\"center\"><font color=\"red\">Cannot open database!</font></h2>");
+                }
+                else {
+                    //out.println("connected to database");
+                    // connect:
+                    int numRowsInserted = 0;
+                    Connection conn = connection.getConnection();
+
+                    String sql = "insert into Login (ID, Login, Password) values (?,?,?)";
+                    
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setInt(1, Integer.valueOf(idNewUser));
+                    pstmt.setString(2, loginNewUser);
+                    pstmt.setString(3, passwordNewUser);
+                    // execute query:
+                    pstmt.executeUpdate();
+                   
+                    %>
+                    <div class="divAdminMessage" style="margin-left: 650px">
+                        <% out.println("<h2  class=\"h2_4\" align=\"center\"><font color=\"green\">" + "Added successfully!" + "</font></h2>"); %>
+                    </div>
+                    <%
+                }
+            }
+            else {
+                %>
+                <div class="divAdminMessage" style="margin-left: 650px">
+                    <% out.println("<h2  class=\"h2_4\" align=\"center\"><font color=\"red\">" + "You haven't entered the all values!" + "</font></h2>"); %>
+                </div>
+                <%
+            }
+
+
+        %>   
         
         
     </body>

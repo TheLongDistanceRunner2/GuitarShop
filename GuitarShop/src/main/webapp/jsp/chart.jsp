@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="../css/style1.css">
     </head>
     <body>
+        <%!
+             ConnectionToSQLite3 connection = new ConnectionToSQLite3();
+             int ClientID = 0;
+             String ClientName = "";
+        %>    
+        
+        
         <%
             Cookie _cookie = null;
             Cookie[] _cookies = null;
@@ -33,6 +40,9 @@
                     if (_cookie.getName().equals("login")) {
                         // set flag:
                         flag = true;
+                        
+                        // set ClientID:
+                        this.ClientName = _cookie.getValue();
                     
                         // show log out button:
                         %>
@@ -197,8 +207,6 @@
                 }
                 
                 // get data from database by id:
-                ConnectionToSQLite3 connection = new ConnectionToSQLite3();
-
                 if(connection.getConnection() == null) {       
                     out.println("<h2 align=\"center\"><font color=\"red\">Cannot open database!</font></h2>");
                 }
@@ -277,10 +285,6 @@
                     }
 
 
-
-
-
-
                     %>
                     <form method="POST" action="chart.jsp" style="margin-left: 850px">
                         <input class="clearChartButton" type="submit" id="clearChartButton" name="clearChartButton" value="Clear chart!"/> 
@@ -296,6 +300,27 @@
                         + sumCost + " zł" + "</font></h2>"); %>
             </div> 
   
+            <div class="divCostSum" style="margin-left: 780px">
+                <form method="POST" action="chart.jsp">
+                    <input class="addToChartButton" type="submit" id="order" name="order" value="Make an order!"/> 
+                </form>    
+            </div> 
+            
+            <%
+                String makeOrder = request.getParameter("order");
+                  
+                if (makeOrder != null) {
+                    // get last ID of Order from Orders table:
+                    String query1 = "select max(ID) from Orders";
+                    this.ClientID = connection.getLastID(query1);
+                    
+                
+//                    String query = "insert into Orders values ()";
+//                    // execute query:
+//                    connection.selectFromDatabase(query);
+                }
+            %>               
+            
             
     </body>
 </html>

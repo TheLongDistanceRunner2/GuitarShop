@@ -114,5 +114,26 @@ public class ConnectionToSQLite3 {
         stmt.close();
         this.connection.close();
     }
+    
+    public int getLastID(String sql) throws SQLException {
+        //step3 create the statement object  
+        Statement stmt = connection.createStatement();  
+
+        //step4 execute query  
+        ResultSet result = stmt.executeQuery(sql);  
+        
+        String _result = "";
+        // odbieramy dane i wpisujemy do wyniku:
+        while (result.next()) {
+            _result = result.getString(1);
+        }
+        
+        // zamykamy zapytanie i połączenie !!!
+        result.close();
+        stmt.close();
+        this.connection.close();
+        
+        return Integer.valueOf(_result);
+    }
    
 }
