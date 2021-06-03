@@ -12,13 +12,13 @@ package com.mycompany.guitarshop;
 public class Order {
     private int ID;
     private int OrderID;
-    private int ClientID;
+    private String ClientName;
     private int ItemID;
 
-    public Order(int ID, int OrderID, int ClientID, int ItemID) {
+    public Order(int ID, int OrderID, String ClientName, int ItemID) {
         this.ID = ID;
         this.OrderID = OrderID;
-        this.ClientID = ClientID;
+        this.ClientName = ClientName;
         this.ItemID = ItemID;
     }
 
@@ -38,20 +38,20 @@ public class Order {
         this.OrderID = OrderID;
     }
 
-    public int getClientID() {
-        return ClientID;
-    }
-
-    public void setClientID(int ClientID) {
-        this.ClientID = ClientID;
-    }
-
     public int getItemID() {
         return ItemID;
     }
 
     public void setItemID(int ItemID) {
         this.ItemID = ItemID;
+    }
+
+    public String getClientName() {
+        return ClientName;
+    }
+
+    public void setClientName(String ClientName) {
+        this.ClientName = ClientName;
     }
     
 }

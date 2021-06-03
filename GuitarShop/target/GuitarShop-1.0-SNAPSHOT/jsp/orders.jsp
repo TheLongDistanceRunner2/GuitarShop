@@ -4,6 +4,9 @@
     Author     : Marcin
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.mycompany.guitarshop.Order"%>
+<%@page import="com.mycompany.guitarshop.ConnectionToSQLite3"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,10 +26,12 @@
         
         <%!
             boolean flag = false;
+            ConnectionToSQLite3 connectionToSQLite3 = new ConnectionToSQLite3();
+            ArrayList<Order> listOrders = new ArrayList<>();
         %>   
         
         <%
-           Cookie _cookie = null;
+            Cookie _cookie = null;
             Cookie[] _cookies = null;
             
             // Get an array of Cookies associated with the this domain
@@ -65,7 +70,52 @@
             }
         %>    
         
+                <script>
+            function mainPage() {
+                window.location = "../index.html";
+            }
+            
+            function products() {
+                window.location = "products.jsp";
+            }
+            
+            function chart() {
+                window.location = "chart.jsp";
+            }
+
+            function logIn() {
+                window.location = "jsp/logIn.jsp";
+            }
+            
+            function contact() {
+                window.location = "jsp/contact.jsp";
+            }
+            
+            function administrationPanel() {
+                window.location = "administrationPanel.jsp";
+            }
+            
+            function orders() {
+                window.location = "orders.jsp";
+            }
+            
+        </script>
         
+        <h1 class="h1">All orders:</h1>
+        
+        <%
+            connectionToSQLite3.getConnection();
+            String query = "select * from Orders order by ClientName desc, OrderID asc";
+            this.listOrders = connectionToSQLite3.getAllOrders(query);
+            
+            for (int i = 0; i < this.listOrders.size(); i++) {
+                out.print(this.listOrders.get(i).getID() + " " 
+                                + this.listOrders.get(i).getOrderID() + " "
+                                + this.listOrders.get(i).getClientName() + " "
+                                + this.listOrders.get(i).getItemID() + "        ");
+            }
+            
+        %>    
         
     </body>
 </html>

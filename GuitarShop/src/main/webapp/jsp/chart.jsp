@@ -4,6 +4,9 @@
     Author     : Marcin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.mycompany.guitarshop.Product"%>
 <%@page import="com.mycompany.guitarshop.ConnectionToSQLite3"%>
 <%@page import="java.util.ArrayList"%>
@@ -21,6 +24,7 @@
              ConnectionToSQLite3 connection = new ConnectionToSQLite3();
              int ClientID = 0;
              String ClientName = "";
+             ArrayList<String> selectedItems = new ArrayList<>();
         %>    
         
         
@@ -185,23 +189,89 @@
         %>    
         
         <%
-            double sumCost = 0;
-            
-            // print cookies with selected items to buy:
             Cookie[] cookies = request.getCookies();
-            ArrayList<String> selectedItems = new ArrayList<>();
+            String makeOrder = request.getParameter("order");
+
+            // ==========================================================
+                // if button MakeOrder has been pressed:
+            if (this.selectedItems.size() > 0) {
+                if (makeOrder != null) {
+                    // 1. Insert into Orders: 
+                    //      (there has to be at least 1 order in database!!! 
+                    //      Unless, add id manually or it will crash!!!)    
+                    
+                    // get last ID of Order from Orders table:
+                    connection.getConnection();
+                    String query1 = "select max(ID) from Orders";
+                    int lastID = connection.getLastID(query1);
+                    lastID++;
+
+                    connection.getConnection();
+                    String query2 = "select max(OrderID) from Orders";
+                    int lastOrderID = connection.getLastID(query2);
+                    lastOrderID++;
+
+                    // for all selected items:
+                    for (int i = 0; i < this.selectedItems.size(); i++) {
+                        String tmpProduct = this.selectedItems.get(i);
+                        int tmpProductID = Integer.valueOf(tmpProduct);
+
+                        connection.getConnection();
+                        String query = "insert into Orders (ID, OrderID, ClientName, ItemID) values (" + lastID + ", " 
+                                                                     + lastOrderID + ", '" 
+                                                                     + this.ClientName.toString() + "', " 
+                                                                     + tmpProductID + ");";
+                        // execute query:
+                        connection.insertOrder(query);
+
+                        lastID++;
+                    } 
+
+                        // 2. Clear tab selectedItems and all associated cookies:
+                    for (int i = 0; i < this.selectedItems.size(); i++) {
+                        // remove item:
+                        this.selectedItems.remove(i);
+
+                        for (int j = 0; j < cookies.length; j++) {
+                            // if found cookie with name addItem:
+                            if(cookies[j].getName().startsWith("addItem")) {
+                                // remove this cookie:
+                                // so get it first:
+                                Cookie _cookie2 = cookies[j];
+
+                                // then set its' time of existing to 0:
+                                _cookie2.setMaxAge(0);
+                                // and finally add it to response header:
+                                response.addCookie(_cookie2);
+                            }
+                        }
+                    }
+                         
+                    this.selectedItems.clear();
+                    out.println("<h2 class=\"h2_2\" align=\"center\"><font color=\"green\">" + "Order made successfully!" + "</font></h2>");
+                    
+                                                // redirect to main page:
+                    String redirectURL = "chart.jsp";
+                    response.sendRedirect(redirectURL); 
+                }
+            }    
+                
+            
+              
+            //==================================================================
+                // print cookies with selected items to buy:
+
+            double sumCost = 0;
             ArrayList<Product> fromDatabase = new ArrayList();
+            this.selectedItems.clear();
             
-            
-            
-        //==================================================================
             // if cookies is not empty:
             if (cookies != null) {
                 for (int i = 0; i < cookies.length; i++) {
                     // if the cookie starts with "addItem" prefix:
                     if(cookies[i].getName().startsWith("addItem")) {
                         // add it to ArrayList of selected items to show later:
-                        selectedItems.add(cookies[i].getValue());
+                        this.selectedItems.add(cookies[i].getValue());
                         //out.println("<h2 class=\"h2_2\" align=\"center\">" + cookies[i].getValue() + "</h2>");
                     }
                 }
@@ -214,6 +284,7 @@
                     //out.println("connected to database");
                     // connect:
                     connection.getConnection();
+                    fromDatabase.clear();
 
                     String query = "select * from Products";
                     // execute query:
@@ -226,9 +297,9 @@
                     String clearChartButton = request.getParameter("clearChartButton");
 
                     if(clearChartButton != null) {
-                        for (int i = 0; i < selectedItems.size(); i++) {
+                        for (int i = 0; i < this.selectedItems.size(); i++) {
                             // remove item:
-                            selectedItems.remove(i);
+                            this.selectedItems.remove(i);
                             
                             for (int j = 0; j < cookies.length; j++) {
                                 // if found cookie with name addItem:
@@ -245,14 +316,14 @@
                             }
                         }
                         
-                        selectedItems.clear();
+                        this.selectedItems.clear();
                     }
 
                     
                     // ==========================================================
                     // print all items added to chart:
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        int currentID = Integer.valueOf(selectedItems.get(i));
+                    for (int i = 0; i < this.selectedItems.size(); i++) {
+                        int currentID = Integer.valueOf(this.selectedItems.get(i));
                         
                         // iterate over ArrayList of all products:
                         for (int j = 0; j < fromDatabase.size(); j++) {
@@ -306,20 +377,7 @@
                 </form>    
             </div> 
             
-            <%
-                String makeOrder = request.getParameter("order");
-                  
-                if (makeOrder != null) {
-                    // get last ID of Order from Orders table:
-                    String query1 = "select max(ID) from Orders";
-                    this.ClientID = connection.getLastID(query1);
-                    
-                
-//                    String query = "insert into Orders values ()";
-//                    // execute query:
-//                    connection.selectFromDatabase(query);
-                }
-            %>               
+            
             
             
     </body>

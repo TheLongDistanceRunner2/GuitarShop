@@ -169,6 +169,11 @@
         
         <br><br>
         <div class="divAdminHeader" style="margin-left: 700px">
+            <input class="addToChartButton" type="button" onclick="orders()" value="See all orders"/>
+        </div>
+        
+        <br><br>
+        <div class="divAdminHeader" style="margin-left: 700px">
             <h2 class="h2_5">Here you can add new items to database: </h2>
         </div>
         
