@@ -77,6 +77,28 @@ body {
     font: 20px helvetica italic bold; 
 }
 
+.h2_7 {
+    color: blue;
+    margin: auto;
+    text-align: center;
+    font: 30px helvetica italic bold; 
+}
+
+.h2_8 {
+    color: green;
+    margin: auto;
+    text-align: center;
+    font: 24px helvetica italic bold; 
+}
+
+.h2_9 {
+    color: black;
+    margin: auto;
+    text-align: center;
+    font: 20px helvetica italic bold; 
+}
+
+
 .div1 {
     color: #ffffff;
     font: 20px helvetica italic bold; 
@@ -201,6 +223,20 @@ body {
    
     width: 500px;
     height: 50px;
+    
+    background-color: lightgrey;
+   
+    border: 2px solid;
+    padding: 50px;
+    margin: 20px;
+}
+
+.divAdminOrders {
+    font: 24px helvetica bold;
+    text-align: center;
+   
+    width: 800px;
+    height: 7500px;
     
     background-color: lightgrey;
    

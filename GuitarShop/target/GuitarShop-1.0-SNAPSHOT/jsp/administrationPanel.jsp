@@ -187,6 +187,8 @@
                 <br>
                 <label>Picture:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="picture" name="picture" type="text"/>
                 <br>
+                <label>Category:</label>&nbsp;&nbsp;<input id="category" name="category" type="text"/>
+                <br>
                 <br>
                 <input class="addToChartButton" type="submit" id="addToDatabase" name="addToDatabase" value="Add to database!"/> 
             </form>
@@ -197,9 +199,10 @@
             String name = request.getParameter("name");
             String price = request.getParameter("price");
             String picture = request.getParameter("picture");
+            String category = request.getParameter("category");
             
             // if button add to database pressed:
-            if (id != null && name != null && price != null && picture != null) {
+            if (id != null && name != null && price != null && picture != null && category != null) {
                 // get products form database:
                 ConnectionToSQLite3 connection = new ConnectionToSQLite3();
 
@@ -212,13 +215,14 @@
                     int numRowsInserted = 0;
                     Connection conn = connection.getConnection();
 
-                    String sql = "insert into Products (ID, Name, Price, Picture) values (?,?,?,?)";
+                    String sql = "insert into Products (ID, Name, Price, Picture, Category) values (?,?,?,?,?)";
                     
                     PreparedStatement pstmt = conn.prepareStatement(sql);
                     pstmt.setInt(1, Integer.valueOf(id));
                     pstmt.setString(2, name);
                     pstmt.setDouble(3, Double.valueOf(price));
                     pstmt.setString(4, picture);
+                    pstmt.setString(5, category);
                     // execute query:
                     pstmt.executeUpdate();
                    
