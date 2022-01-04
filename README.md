@@ -7,7 +7,8 @@ It includes 3 scenarios:
 - administrator
 
 (In order to run the app, add folder named "pictures" with some photos of products!)
-// ===========================================
+
+// ===================================
 
 Strona internetowa do kupoawnia i sprzedawania gitar, wzmacniaczy, efektów etc. napisana od zera przy użyciu JSP, HTML, CSS and JavaScript.
 Zawiera 3 scenarusze:
