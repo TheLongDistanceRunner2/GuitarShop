@@ -11,7 +11,7 @@ It includes 3 scenarios:
 // ===================================
 
 Strona internetowa do kupowania i sprzedawania gitar, wzmacniaczy, efektów etc. napisana od zera przy użyciu JSP, HTML, CSS and JavaScript.
-Zawiera 3 scenarusze:
+Zawiera 3 scenariusze:
 - użytkownik niezalogowany
 - użytkownik zalogowany
 - administrator
